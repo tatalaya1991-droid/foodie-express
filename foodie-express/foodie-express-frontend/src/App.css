@@ -1,0 +1,625 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+/* =============================
+   Foodie Express - UI nâng cấp
+   ============================= */
+
+.fe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.fe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fe-brand {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 20px;
+  padding: 4px 8px;
+}
+
+.fe-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.fe-user {
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+}
+
+.fe-icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.fe-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff4d4f;
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: 900;
+  border: 2px solid #fff;
+}
+
+.fe-hero {
+  text-align: left;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: linear-gradient(90deg, #ecfeff, #fff7ed);
+  margin-bottom: 12px;
+}
+
+.fe-hero__title {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.fe-hero__sub {
+  color: #555;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.fe-controls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.fe-search {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 12px 12px;
+  outline: none;
+  font-weight: 600;
+}
+
+.fe-select {
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 12px 12px;
+  background: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fe-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+  justify-content: center;
+}
+
+.fe-chip {
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.fe-chip.active {
+  background: #ffedd5;
+  border-color: rgba(249,115,22,0.35);
+}
+
+@media (max-width: 640px) {
+  .fe-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.filter {
+  margin-bottom: 25px;
+}
+
+.filter button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter button.active {
+  background-color: #ff9800;
+  color: white;
+}
+
+.filter button:hover {
+  background-color: #ffd699;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.price {
+  color: #e91e63;
+  font-weight: bold;
+}
+
+.category {
+  color: #777;
+  font-size: 14px;
+}
+
+/* ==== Thêm phần số lượng và nút mua ==== */
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.quantity-control button {
+  background-color: #ff9800;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quantity-control input {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+.buy-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #45a049;
+}
+
+.cart-btn {
+  background-color: #2196f3;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-btn:hover {
+  background-color: #1976d2;
+}
+
+.quantity-box {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-box input {
+  width: 60px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
+/* ===== FoodieExpress UI v2 (ShopeeFood-ish) ===== */
+.fe-container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 14px;
+}
+
+.fe-topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eee;
+}
+
+.fe-topbar-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 14px;
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  justify-content: space-between;
+}
+
+.fe-brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 18px;
+  color: #111;
+  text-decoration:none;
+}
+
+.fe-pill{
+  border: 1px solid #e6e6e6;
+  background: white;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.fe-pill.primary{
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+
+.fe-search{
+  flex:1;
+  display:flex;
+  gap: 8px;
+  align-items:center;
+  max-width: 520px;
+}
+
+.fe-input{
+  width:100%;
+  border:1px solid #e6e6e6;
+  border-radius: 999px;
+  padding: 10px 14px;
+  outline:none;
+}
+.fe-input:focus{ border-color:#bdbdbd; }
+
+.fe-select{
+  border:1px solid #e6e6e6;
+  border-radius: 999px;
+  padding: 10px 12px;
+  outline:none;
+  background:white;
+}
+
+.fe-hero{
+  border-radius: 18px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+  border:1px solid #eee;
+  display:flex;
+  gap: 14px;
+  align-items:center;
+  justify-content: space-between;
+}
+
+.fe-hero h1{
+  margin:0;
+  font-size: 26px;
+}
+.fe-hero p{ margin:6px 0 0; color:#555; }
+
+.fe-grid{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 1000px){
+  .fe-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 720px){
+  .fe-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .fe-search{ display:none; }
+}
+
+.fe-card{
+  border:1px solid #eee;
+  border-radius: 18px;
+  overflow:hidden;
+  background:white;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.fe-card-imgWrap{
+  position:relative;
+  height: 160px;
+  background:#f5f5f5;
+}
+.fe-card-imgLink{ display:block; width:100%; height:100%; }
+.fe-card-img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+.fe-card-imgPlaceholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 34px;
+}
+
+.fe-favBtn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  cursor:pointer;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  font-size: 18px;
+}
+.fe-favBtn.active{ background: #ffe4e6; }
+
+.fe-card-body{ padding: 12px; }
+.fe-card-title{ font-weight: 900; margin-bottom: 6px; }
+.fe-link{ text-decoration:none; color:#111; }
+.fe-link:hover{ text-decoration: underline; }
+
+.fe-card-meta{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  color:#666;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.fe-price{ color:#111; font-weight: 900; }
+
+.fe-card-actions{ display:flex; gap: 8px; }
+.fe-btn{
+  border:1px solid #e6e6e6;
+  background:white;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor:pointer;
+  font-weight: 800;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+}
+.fe-btn-primary{ background:#111; border-color:#111; color:white; }
+.fe-btn-ghost{ background:#fff; }
+
+.fe-slider{
+  border-radius: 18px;
+  overflow:hidden;
+  border:1px solid #eee;
+  margin-top: 14px;
+  position: relative;
+}
+
+.fe-slide{
+  height: 220px;
+  background:#f3f3f3;
+  display:flex;
+  align-items:flex-end;
+  padding: 18px;
+  background-size: cover;
+  background-position:center;
+}
+.fe-slideTitle{
+  background: rgba(255,255,255,.86);
+  border:1px solid rgba(255,255,255,.65);
+  border-radius: 16px;
+  padding: 12px 14px;
+  max-width: 560px;
+}
+.fe-slideTitle b{ display:block; font-size: 18px; }
+.fe-slideTitle span{ display:block; color:#555; font-size: 13px; margin-top: 4px; }
+
+.fe-slider-controls{
+  position:absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+.fe-circle{
+  border:none;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor:pointer;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  font-weight: 900;
+}
+
+.fe-section-title{
+  margin: 18px 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.fe-summaryCard{
+  border:1px solid #eee;
+  border-radius: 16px;
+  padding: 12px;
+  background:white;
+}
+
+.fe-modalBackdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.fe-modal{
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(16, 24, 40, 0.25);
+  padding: 14px;
+}
+
+.fe-chatFab{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 60;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
+.fe-chatPanel{
+  position: fixed;
+  right: 18px;
+  bottom: 84px;
+  width: 360px;
+  max-width: calc(100vw - 36px);
+  height: 440px;
+  max-height: calc(100vh - 140px);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(16, 24, 40, 0.25);
+  z-index: 60;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fe-chatHeader{
+  padding: 10px;
+  border-bottom: 1px solid #f2f4f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.fe-chatList{
+  flex: 1;
+  overflow: auto;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  background: #fcfcfd;
+}
+
+.fe-chatBubble{
+  max-width: 85%;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid #eef2f6;
+  background: white;
+}
+
+.fe-chatBubble.me{
+  margin-left: auto;
+  background: #111827;
+  color: white;
+  border-color: #111827;
+}
+
+.fe-chatComposer{
+  padding: 10px;
+  border-top: 1px solid #f2f4f7;
+  display: flex;
+  gap: 8px;
+}
+

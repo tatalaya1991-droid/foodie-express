@@ -1,21 +1,47 @@
-// LoginPage.js
+// src/LoginPage.js
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "./firebase";
+import AuthModalWrapper from "./AuthModalWrapper";
 
-export default function LoginPage({ onSwitchToRegister }) {
-  const { login } = useAuth();
+export default function LoginPage({ onClose, onSwitch, onSuccess }) {
+  const { login, socialLogin } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(email, password, () => window.location.href = "/");
+    try {
+      await login(email, password);
+      onSuccess?.();
+    } catch (err) {
+      alert(err?.message || "Đăng nhập thất bại");
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken();
+      await socialLogin(idToken);
+      onSuccess?.();
+    } catch (err) {
+      alert("Đăng nhập Google thất bại");
+      console.error(err);
+    }
   };
 
   return (
-    <div style={wrapper}>
+    <AuthModalWrapper>
       <div style={card}>
+        {onClose && (
+          <button style={closeBtn} onClick={onClose}>✖</button>
+        )}
+
         <h2>🔐 Đăng nhập</h2>
+
         <form onSubmit={handleSubmit}>
           <input
             style={input}
@@ -33,54 +59,77 @@ export default function LoginPage({ onSwitchToRegister }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button style={btn} type="submit">Đăng nhập</button>
         </form>
-        <p style={{ marginTop: 12 }}>
+
+        <button style={googleBtn} onClick={handleGoogleLogin}>
+          🔵 Đăng nhập bằng Google
+        </button>
+
+        <p style={{ marginTop: 14 }}>
           Chưa có tài khoản?{" "}
-          <button onClick={onSwitchToRegister} style={link}>Đăng ký ngay</button>
+          <button onClick={onSwitch} style={linkBtn}>
+            Đăng ký ngay
+          </button>
         </p>
       </div>
-    </div>
+    </AuthModalWrapper>
   );
 }
 
-const wrapper = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  background: "linear-gradient(135deg, #f8f9fa, #dfe6e9)",
-};
 const card = {
-  width: 350,
-  padding: 30,
-  borderRadius: 12,
+  position: "relative",
+  width: 380,
+  padding: 28,
+  borderRadius: 14,
   background: "#fff",
-  boxShadow: "0 2px 12px rgba(0,0,0,0.1)",
+  boxShadow: "0 2px 16px rgba(0,0,0,0.12)",
   textAlign: "center",
 };
+
+const closeBtn = {
+  position: "absolute",
+  top: 10,
+  right: 10,
+  border: "none",
+  background: "transparent",
+  cursor: "pointer",
+};
+
 const input = {
   width: "100%",
-  padding: 10,
+  padding: 12,
   margin: "8px 0",
-  borderRadius: 6,
+  borderRadius: 10,
   border: "1px solid #ccc",
 };
+
 const btn = {
   width: "100%",
   padding: 12,
   marginTop: 10,
   border: "none",
-  borderRadius: 8,
-  background: "#28a745",
+  borderRadius: 10,
+  background: "#198754",
   color: "#fff",
-  cursor: "pointer",
-  fontSize: 16,
   fontWeight: "bold",
 };
-const link = {
-  background: "none",
+
+const googleBtn = {
+  width: "100%",
+  padding: 12,
+  marginTop: 10,
+  border: "1px solid #ddd",
+  borderRadius: 10,
+  background: "#fff",
+  fontWeight: 700,
+};
+
+const linkBtn = {
   border: "none",
-  color: "#007bff",
+  background: "transparent",
+  color: "#0d6efd",
+  fontWeight: 700,
   cursor: "pointer",
 };

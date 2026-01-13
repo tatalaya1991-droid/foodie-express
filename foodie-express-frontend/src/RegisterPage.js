@@ -1,93 +1,115 @@
-// RegisterPage.js
+// src/RegisterPage.js
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
+import AuthModalWrapper from "./AuthModalWrapper";
 
-export default function RegisterPage({ onSwitchToLogin }) {
+export default function RegisterPage({ onClose, onSwitch, onSuccess }) {
   const { register } = useAuth();
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
 
-  const handleSubmit = (e) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    register(form.name, form.email, form.password, () => window.location.href = "/");
+    try {
+      await register(name, email, password);
+      onSuccess?.();
+    } catch (err) {
+      alert(err?.message || "Đăng ký thất bại");
+    }
   };
 
   return (
-    <div style={wrapper}>
+    <AuthModalWrapper>
       <div style={card}>
-        <h2>📝 Đăng ký tài khoản</h2>
+        {onClose && (
+          <button style={closeBtn} onClick={onClose}>✖</button>
+        )}
+
+        <h2>📝 Đăng ký</h2>
+
         <form onSubmit={handleSubmit}>
           <input
             style={input}
-            type="text"
-            placeholder="Họ và tên"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            placeholder="Họ tên"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
           <input
             style={input}
             type="email"
             placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
             style={input}
             type="password"
             placeholder="Mật khẩu"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button style={btn} type="submit">Đăng ký</button>
+
+          <button style={btn} type="submit">Tạo tài khoản</button>
         </form>
-        <p style={{ marginTop: 12 }}>
+
+        <p style={{ marginTop: 14 }}>
           Đã có tài khoản?{" "}
-          <button onClick={onSwitchToLogin} style={link}>Đăng nhập</button>
+          <button onClick={onSwitch} style={linkBtn}>
+            Đăng nhập
+          </button>
         </p>
       </div>
-    </div>
+    </AuthModalWrapper>
   );
 }
 
-const wrapper = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  background: "linear-gradient(135deg, #f8f9fa, #dfe6e9)",
-};
 const card = {
-  width: 350,
-  padding: 30,
-  borderRadius: 12,
+  position: "relative",
+  width: 380,
+  padding: 28,
+  borderRadius: 14,
   background: "#fff",
-  boxShadow: "0 2px 12px rgba(0,0,0,0.1)",
+  boxShadow: "0 2px 16px rgba(0,0,0,0.12)",
   textAlign: "center",
 };
+
+const closeBtn = {
+  position: "absolute",
+  top: 10,
+  right: 10,
+  border: "none",
+  background: "transparent",
+  cursor: "pointer",
+};
+
 const input = {
   width: "100%",
-  padding: 10,
+  padding: 12,
   margin: "8px 0",
-  borderRadius: 6,
+  borderRadius: 10,
   border: "1px solid #ccc",
 };
+
 const btn = {
   width: "100%",
   padding: 12,
   marginTop: 10,
   border: "none",
-  borderRadius: 8,
-  background: "#007bff",
+  borderRadius: 10,
+  background: "#0d6efd",
   color: "#fff",
-  cursor: "pointer",
-  fontSize: 16,
   fontWeight: "bold",
 };
-const link = {
-  background: "none",
+
+const linkBtn = {
   border: "none",
-  color: "#007bff",
+  background: "transparent",
+  color: "#0d6efd",
+  fontWeight: 700,
   cursor: "pointer",
 };
